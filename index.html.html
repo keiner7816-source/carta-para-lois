@@ -7,53 +7,36 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Poppins:wght@500;700&display=swap" rel="stylesheet">
   <style>
     :root{
-      --bg1:#070917; /* nocturno */
-      --bg2:#1b1230; /* lila profundo */
-      --text:#ecf0ff;
-      --muted:#aeb8d6;
+      --bg1:#070917; --bg2:#1b1230; --text:#ecf0ff; --muted:#aeb8d6;
       --card-bg: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
     }
     *{box-sizing:border-box}
-    html,body{height:100%;margin:0;font-family:Inter,system-ui,Arial;background:radial-gradient(ellipse at 10% 10%, rgba(255,255,255,0.02) 0%, transparent 15%), linear-gradient(180deg,var(--bg1) 0%,var(--bg2) 100%);color:var(--text);-webkit-font-smoothing:antialiased}
-
-    /* animated starfield */
+    html,body{height:100%;margin:0;font-family:Inter,system-ui,Arial;
+      background:radial-gradient(ellipse at 10% 10%, rgba(255,255,255,0.02) 0%, transparent 15%),
+                 linear-gradient(180deg,var(--bg1) 0%,var(--bg2) 100%);
+      color:var(--text);-webkit-font-smoothing:antialiased}
     .starfield{position:fixed;inset:0;pointer-events:none;overflow:hidden}
-    .stars{position:absolute;inset:0;background-image:radial-gradient(circle at 10% 20%, rgba(255,255,255,0.9) 0px, rgba(255,255,255,0.9) 1px, transparent 2px), radial-gradient(circle at 40% 40%, rgba(255,255,255,0.85) 0px, rgba(255,255,255,0.85) 1px, transparent 2px);background-size: 600px 400px;opacity:0.9;animation:drift 60s linear infinite}
+    .stars{position:absolute;inset:0;background-size:cover;opacity:0.9;animation:drift 60s linear infinite}
     @keyframes drift{from{transform:translateY(0) translateX(0)}to{transform:translateY(-120px) translateX(-60px)}}
-
-    /* gentle moving lights */
     .lights{position:fixed;inset:0;pointer-events:none}
     .light{position:absolute;border-radius:50%;filter:blur(22px);opacity:0.14;animation:float 18s ease-in-out infinite}
     @keyframes float{0%{transform:translateY(0)}50%{transform:translateY(-28px)}100%{transform:translateY(0)}}
-
     main{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:48px}
     .card{width:min(980px,96%);background:var(--card-bg);border-radius:18px;padding:44px 48px;backdrop-filter:blur(8px);box-shadow:0 16px 40px rgba(2,6,23,0.6);position:relative;overflow:hidden}
-
     header{display:flex;align-items:center;gap:16px;margin-bottom:18px}
     .moonBadge{width:88px;height:88px;border-radius:50%;background:radial-gradient(circle at 30% 30%, #fff 0%, #fff2 6%, transparent 20%),linear-gradient(180deg,#fff1 0%,transparent 60%);display:flex;align-items:center;justify-content:center;font-size:34px;box-shadow:0 8px 30px rgba(0,0,0,0.5)}
     .title{font-family:Poppins,system-ui,serif;font-size:24px;font-weight:700}
     .subtitle{color:var(--muted);font-size:13px}
-
     .content{line-height:1.75;font-size:18px;color:var(--text);max-width:820px}
     .para{margin:20px 0;opacity:0;transform:translateY(14px);transition:all 700ms cubic-bezier(.2,.9,.25,1)}
     .para.visible{opacity:1;transform:none}
     .small{color:var(--muted);font-size:14px}
-
-    /* gallery now shows moon/night art placeholders */
-    .gallery{display:flex;gap:12px;margin:18px 0}
-    .img-placeholder{flex:1;height:120px;border-radius:12px;display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,0.4);font-size:13px;background-size:cover;background-position:center}
-    #img1{background-image: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.08), transparent 20%), linear-gradient(180deg,#0f1530 0%, #1a1330 100%);}
-    #img2{background-image: radial-gradient(circle at 60% 40%, rgba(255,255,255,0.06), transparent 18%), linear-gradient(180deg,#12122a 0%, #27173b 100%);}
-    #img3{background-image: radial-gradient(circle at 50% 60%, rgba(255,255,255,0.05), transparent 18%), linear-gradient(180deg,#0b1021 0%, #24132f 100%);}
-
     footer{margin-top:28px;display:flex;justify-content:space-between;align-items:center;gap:12px}
     .signature{font-family:Poppins,system-ui,serif;font-size:15px;color:var(--text)}
     .controls{display:flex;align-items:center;gap:10px}
     .btn{background:rgba(255,255,255,0.03);padding:10px 14px;border-radius:10px;border:1px solid rgba(255,255,255,0.04);cursor:pointer;color:var(--text);font-size:14px}
     .btn:active{transform:translateY(1px)}
-
     .floating{position:absolute;inset:0;pointer-events:none}
-
     @media (max-width:640px){.card{padding:28px}.title{font-size:18px}.moonBadge{width:64px;height:64px}}
   </style>
 </head>
@@ -78,52 +61,26 @@
       </header>
 
       <section class="content" id="content">
-
-        <div class="gallery" aria-hidden>
-          <div class="img-placeholder" id="img1">Luna</div>
-          <div class="img-placeholder" id="img2">Noche</div>
-          <div class="img-placeholder" id="img3">Reflejo</div>
-        </div>
-
         <div class="para">Hay días en los que el tiempo parece detenerse, y en ese silencio solo estás tú.</div>
         <div class="para">Tu nombre se siente distinto, como si tuviera su propio eco en mi mente, uno que me recuerda que desde que llegaste, nada volvió a ser igual.</div>
-
         <div class="para">No sé exactamente en qué momento empecé a necesitar tus palabras, tus risas o incluso tus enojos, pero hoy, si me lo preguntan, diría que te volviste parte de mi día sin que yo me diera cuenta. A veces pienso que, aunque no dijéramos nada, igual sabrías cómo me siento. Como si bastara tu presencia para calmar cualquier ruido dentro de mí.</div>
-
         <div class="para">Contigo aprendí que no hace falta estar siempre haciendo algo para sentirme bien. Que el simple hecho de verte reír o quedarte en silencio ya basta para que el mundo se sienta un poco más amable. Hay algo en ti, Lois, que me devuelve las ganas, que me recuerda que no todo está perdido.</div>
-
         <div class="para">Recuerdo esos primeros momentos, cuando apenas nos conocíamos y todo era nuevo. No imaginaba que, con el tiempo, terminarías siendo una parte tan importante de mi vida. Tres meses pueden parecer poco para algunos, pero para mí, contigo, se han sentido como una historia entera. Con días difíciles, sí, pero también con instantes tan cálidos que todavía los guardo como si fueran tesoros.</div>
-
         <div class="para">A veces pienso en lo mucho que hemos pasado. En cómo, incluso cuando hubo dudas o tropiezos, siempre quedó algo claro: no hay otro lugar donde prefiera estar que a tu lado. Tu forma de mirar, de hablar, de reír, de ser… todo en ti tiene ese algo que me atrapa.</div>
-
         <div class="para">Y aunque no siempre te lo diga como debería, quiero que sepas que cada palabra tuya deja huella. Cada vez que me hablas, algo dentro de mí se acomoda. Eres esa calma que no sabía que necesitaba, esa persona con la que puedo ser yo, sin miedo, sin máscaras.</div>
-
         <div class="para">Cuando compartimos nuestros momentos, cuando reímos por tonterías o simplemente nos quedamos en silencio, siento que ahí está la verdadera felicidad.</div>
-
         <div class="para">Quiero que sepas que cada segundo contigo me enseña algo nuevo. Me enseña que amar no siempre es un fuego que quema; a veces es una luz que guía, que da calor y que acompaña incluso en los días fríos. Y contigo, Lois, cada día tiene un poco de esa luz.</div>
-
         <div class="para">No sé qué nos espera más adelante, pero sí sé lo que quiero: seguir contigo, seguir compartiendo risas, conversaciones largas y silencios cómodos. Quiero que cada día que pase, cuando mires atrás, recuerdes que hubo alguien que te quiso con todo, incluso en los días donde parecía que el mundo se olvidaba de hacerlo.</div>
-
         <div class="para">Gracias por estos tres meses, por cada palabra, cada mirada y cada instante compartido. Gracias por existir, por quedarte, por hacerme sentir que valgo, por permitirme conocerte más allá de lo que muestran las apariencias.</div>
-
         <div class="para">Y si algún día vuelves a leer estas palabras, espero que sientas el abrazo que hay detrás de cada una. Porque cada letra nace de lo que me haces sentir, de esa paz que solo tú sabes darme.</div>
-
         <div class="para">Lois… gracias por existir en mi mundo, por darle color a los días grises, por recordarme que amar también puede ser suave, tranquilo y verdadero.</div>
-
         <div class="para">Te amo más de lo que las palabras pueden decir, más allá del tiempo, más allá de cualquier distancia.</div>
-
         <div class="para">Y si la vida me diera la opción de elegir de nuevo, siempre volvería a encontrarte, una y otra vez.</div>
-
         <div class="para" style="margin-top:20px;font-size:15px;color:var(--muted);">Con amor, desde el rincón del alma que solo tú conoces.</div>
-
       </section>
 
       <footer>
         <div class="signature small">Una carta hecha con todo mi cariño.</div>
-        <div class="controls">
-          <button class="btn" id="togglePlay">▶ Reproducir música</button>
-          <button class="btn" id="downloadBtn">Descargar (HTML)</button>
-        </div>
       </footer>
 
       <div class="floating" aria-hidden></div>
@@ -132,14 +89,10 @@
   </main>
 
   <script>
-    // reveal paragraphs on scroll (fade)
     const paras = Array.from(document.querySelectorAll('.para'));
-    const obs = new IntersectionObserver(entries=>{
-      entries.forEach(entry=>{ if(entry.isIntersecting) entry.target.classList.add('visible'); });
-    },{threshold:0.15});
+    const obs = new IntersectionObserver(entries=>{entries.forEach(entry=>{ if(entry.isIntersecting) entry.target.classList.add('visible'); });},{threshold:0.15});
     paras.forEach(p=>obs.observe(p));
 
-    // subtle floating icons
     const floating = document.querySelector('.floating');
     function spawnSpark(){
       const el = document.createElement('div');
@@ -151,71 +104,8 @@
     }
     setInterval(spawnSpark,1200);
 
-    // starfield variation (adds twinkle by changing opacity)
     const stars = document.querySelector('.stars');
     for(let i=0;i<40;i++){ const s=document.createElement('div'); s.style.position='absolute'; s.style.width=(1+Math.random()*2)+'px'; s.style.height=s.style.width; s.style.left=Math.random()*100+'%'; s.style.top=Math.random()*100+'%'; s.style.background='white'; s.style.opacity=Math.random(); s.style.borderRadius='50%'; s.style.filter='blur(0.4px)'; stars.appendChild(s); }
-
-    // simple ambient piano-like synth using WebAudio (no external file needed)
-    let audioCtx=null; let synthInterval=null; let isPlaying=false;
-    const toggle = document.getElementById('togglePlay');
-    function playAmbient(){
-      if(!audioCtx){ audioCtx=new (window.AudioContext || window.webkitAudioContext)(); }
-      const now = audioCtx.currentTime;
-      // chord progression (simple)
-      const notes = [261.63, 329.63, 392.00, 523.25]; // C E G C
-      function playNote(freq, time, dur){
-        const osc = audioCtx.createOscillator();
-        const gain = audioCtx.createGain();
-        const filt = audioCtx.createBiquadFilter(); filt.type='lowpass'; filt.frequency.value=1200;
-        osc.type='sine'; osc.frequency.value=freq;
-        gain.gain.value=0; osc.connect(filt); filt.connect(gain); gain.connect(audioCtx.destination);
-        osc.start(time);
-        gain.gain.setValueAtTime(0,time); gain.gain.linearRampToValueAtTime(0.12, time+0.03);
-        gain.gain.exponentialRampToValueAtTime(0.0001, time+dur);
-        setTimeout(()=>{try{osc.stop(); osc.disconnect();}catch(e){}}, (dur+0.1)*1000);
-      }
-      // schedule a soft pattern every 3.8s
-      playPattern();
-      synthInterval = setInterval(playPattern, 3800);
-      function playPattern(){
-        const base = audioCtx.currentTime + 0.05;
-        playNote(notes[0], base, 1.8);
-        playNote(notes[1], base+0.4, 1.6);
-        playNote(notes[2], base+0.9, 1.2);
-        playNote(notes[3], base+1.6, 1.8);
-      }
-    }
-    function stopAmbient(){ if(synthInterval) clearInterval(synthInterval); synthInterval=null; }
-    toggle.addEventListener('click', ()=>{
-      if(!isPlaying){ playAmbient(); toggle.textContent='⏸ Pausar música'; } else { stopAmbient(); toggle.textContent='▶ Reproducir música'; }
-      isPlaying = !isPlaying;
-    });
-
-    // download current HTML
-    document.getElementById('downloadBtn').addEventListener('click', ()=>{
-      const blob = new Blob([document.documentElement.outerHTML], {type: 'text/html'});
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement('a'); a.href = url; a.download = 'tu_mi_luna_eterna.html'; a.click(); URL.revokeObjectURL(url);
-    });
-
-    // allow dropping real photos into placeholders
-    function setupDrop(id){
-      const el = document.getElementById(id);
-      el.addEventListener('dragover', e=>{e.preventDefault(); el.style.opacity=0.85});
-      el.addEventListener('dragleave', e=>{el.style.opacity=1});
-      el.addEventListener('drop', e=>{e.preventDefault(); el.style.opacity=1; const file = e.dataTransfer.files[0]; if(!file) return; const reader = new FileReader(); reader.onload = ev => { el.style.background = `url(${ev.target.result}) center/cover no-repeat`; el.textContent=''; }; reader.readAsDataURL(file); });
-    }
-    ['img1','img2','img3'].forEach(setupDrop);
-
   </script>
-
-  <!-- INSTRUCCIONES RÁPIDAS para ti, Kevin:
-       1) Abre esta página en tu navegador (previsualizar desde el editor) para ver cómo queda.
-       2) Puedes insertar tus propias fotos arrastrándolas a los recuadros "Luna / Noche / Reflejo".
-       3) Pulsa "Reproducir música" para activar un fondo instrumental sintetizado (no necesita archivo externo).
-       4) Usa "Descargar (HTML)" para guardar el archivo final en tu PC. Subelo a Netlify/Vercel/GitHub Pages para obtener un link público.
-       Si quieres, puedo darte pasos para subirlo a Netlify o Vercel paso a paso y dejarlo online.
-  -->
 </body>
 </html>
-
