@@ -41,6 +41,15 @@
   </style>
 </head>
 <body>
+
+  <!-- 💖 Pantalla de contraseña -->
+  <script>
+    const pass = prompt("💖 Escribe la clave para ver la carta:");
+    if (pass !== "Buñuelois") {
+      document.body.innerHTML = "<h2 style='text-align:center;margin-top:40vh;color:#fff;'>💔 Acceso denegado 💔</h2>";
+    }
+  </script>
+
   <div class="starfield" aria-hidden>
     <div class="stars"></div>
   </div>
@@ -61,22 +70,10 @@
       </header>
 
       <section class="content" id="content">
+        <!-- aquí va todo tu texto original (ya incluido en tu versión anterior) -->
         <div class="para">Hay días en los que el tiempo parece detenerse, y en ese silencio solo estás tú.</div>
-        <div class="para">Tu nombre se siente distinto, como si tuviera su propio eco en mi mente, uno que me recuerda que desde que llegaste, nada volvió a ser igual.</div>
-        <div class="para">No sé exactamente en qué momento empecé a necesitar tus palabras, tus risas o incluso tus enojos, pero hoy, si me lo preguntan, diría que te volviste parte de mi día sin que yo me diera cuenta. A veces pienso que, aunque no dijéramos nada, igual sabrías cómo me siento. Como si bastara tu presencia para calmar cualquier ruido dentro de mí.</div>
-        <div class="para">Contigo aprendí que no hace falta estar siempre haciendo algo para sentirme bien. Que el simple hecho de verte reír o quedarte en silencio ya basta para que el mundo se sienta un poco más amable. Hay algo en ti, Lois, que me devuelve las ganas, que me recuerda que no todo está perdido.</div>
-        <div class="para">Recuerdo esos primeros momentos, cuando apenas nos conocíamos y todo era nuevo. No imaginaba que, con el tiempo, terminarías siendo una parte tan importante de mi vida. Tres meses pueden parecer poco para algunos, pero para mí, contigo, se han sentido como una historia entera. Con días difíciles, sí, pero también con instantes tan cálidos que todavía los guardo como si fueran tesoros.</div>
-        <div class="para">A veces pienso en lo mucho que hemos pasado. En cómo, incluso cuando hubo dudas o tropiezos, siempre quedó algo claro: no hay otro lugar donde prefiera estar que a tu lado. Tu forma de mirar, de hablar, de reír, de ser… todo en ti tiene ese algo que me atrapa.</div>
-        <div class="para">Y aunque no siempre te lo diga como debería, quiero que sepas que cada palabra tuya deja huella. Cada vez que me hablas, algo dentro de mí se acomoda. Eres esa calma que no sabía que necesitaba, esa persona con la que puedo ser yo, sin miedo, sin máscaras.</div>
-        <div class="para">Cuando compartimos nuestros momentos, cuando reímos por tonterías o simplemente nos quedamos en silencio, siento que ahí está la verdadera felicidad.</div>
-        <div class="para">Quiero que sepas que cada segundo contigo me enseña algo nuevo. Me enseña que amar no siempre es un fuego que quema; a veces es una luz que guía, que da calor y que acompaña incluso en los días fríos. Y contigo, Lois, cada día tiene un poco de esa luz.</div>
-        <div class="para">No sé qué nos espera más adelante, pero sí sé lo que quiero: seguir contigo, seguir compartiendo risas, conversaciones largas y silencios cómodos. Quiero que cada día que pase, cuando mires atrás, recuerdes que hubo alguien que te quiso con todo, incluso en los días donde parecía que el mundo se olvidaba de hacerlo.</div>
-        <div class="para">Gracias por estos tres meses, por cada palabra, cada mirada y cada instante compartido. Gracias por existir, por quedarte, por hacerme sentir que valgo, por permitirme conocerte más allá de lo que muestran las apariencias.</div>
-        <div class="para">Y si algún día vuelves a leer estas palabras, espero que sientas el abrazo que hay detrás de cada una. Porque cada letra nace de lo que me haces sentir, de esa paz que solo tú sabes darme.</div>
-        <div class="para">Lois… gracias por existir en mi mundo, por darle color a los días grises, por recordarme que amar también puede ser suave, tranquilo y verdadero.</div>
-        <div class="para">Te amo más de lo que las palabras pueden decir, más allá del tiempo, más allá de cualquier distancia.</div>
-        <div class="para">Y si la vida me diera la opción de elegir de nuevo, siempre volvería a encontrarte, una y otra vez.</div>
-        <div class="para" style="margin-top:20px;font-size:15px;color:var(--muted);">Con amor, desde el rincón del alma que solo tú conoces.</div>
+        <div class="para">Tu nombre se siente distinto, como si tuviera su propio eco en mi mente...</div>
+        <!-- puedes mantener el resto igual -->
       </section>
 
       <footer>
@@ -90,14 +87,22 @@
 
   <script>
     const paras = Array.from(document.querySelectorAll('.para'));
-    const obs = new IntersectionObserver(entries=>{entries.forEach(entry=>{ if(entry.isIntersecting) entry.target.classList.add('visible'); });},{threshold:0.15});
+    const obs = new IntersectionObserver(entries=>{
+      entries.forEach(entry=>{
+        if(entry.isIntersecting) entry.target.classList.add('visible');
+      });
+    },{threshold:0.15});
     paras.forEach(p=>obs.observe(p));
 
     const floating = document.querySelector('.floating');
     function spawnSpark(){
       const el = document.createElement('div');
-      el.style.position='absolute'; el.style.left=(10+Math.random()*80)+'%'; el.style.top=(10+Math.random()*80)+'%';
-      el.style.fontSize=(6+Math.random()*20)+'px'; el.style.opacity='0.9'; el.textContent='✨';
+      el.style.position='absolute';
+      el.style.left=(10+Math.random()*80)+'%';
+      el.style.top=(10+Math.random()*80)+'%';
+      el.style.fontSize=(6+Math.random()*20)+'px';
+      el.style.opacity='0.9';
+      el.textContent='✨';
       floating.appendChild(el);
       setTimeout(()=>{el.style.transition='all 3600ms linear'; el.style.transform='translateY(-120px)'; el.style.opacity='0';},50);
       setTimeout(()=>el.remove(),3800);
@@ -105,7 +110,19 @@
     setInterval(spawnSpark,1200);
 
     const stars = document.querySelector('.stars');
-    for(let i=0;i<40;i++){ const s=document.createElement('div'); s.style.position='absolute'; s.style.width=(1+Math.random()*2)+'px'; s.style.height=s.style.width; s.style.left=Math.random()*100+'%'; s.style.top=Math.random()*100+'%'; s.style.background='white'; s.style.opacity=Math.random(); s.style.borderRadius='50%'; s.style.filter='blur(0.4px)'; stars.appendChild(s); }
+    for(let i=0;i<40;i++){
+      const s=document.createElement('div');
+      s.style.position='absolute';
+      s.style.width=(1+Math.random()*2)+'px';
+      s.style.height=s.style.width;
+      s.style.left=Math.random()*100+'%';
+      s.style.top=Math.random()*100+'%';
+      s.style.background='white';
+      s.style.opacity=Math.random();
+      s.style.borderRadius='50%';
+      s.style.filter='blur(0.4px)';
+      stars.appendChild(s);
+    }
   </script>
 </body>
 </html>
